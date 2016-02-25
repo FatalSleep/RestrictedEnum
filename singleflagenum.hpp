@@ -4,11 +4,11 @@
   over enum values. So this is simplified.
 */
 
-#ifndef RESTRICTED_ENUM
-#define RESTRICTED_ENUM
+#ifndef SINGLEFLAG_ENUM
+#define SINGLEFLAG_ENUM
 
 template<typename t>
-class restrictedenum {
+class singleflagenum {
     private:
     t eflag;
 
