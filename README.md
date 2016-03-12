@@ -1,2 +1,5 @@
-# SingleFlagEnum<T>
-Class for creating a one-flag restricted enum of type T. Use this if you need to allow only setting a single flag of an neum rather than multiple.
+# SingularFlag<T>
+Allows you to create an instance that can only hold a single flag from any given enumeration.
+
+# ImmutableSingularFlag<T>
+Immutable varient of SingularFLag<T> that is thread safe.
