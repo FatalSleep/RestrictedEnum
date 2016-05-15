@@ -43,12 +43,6 @@ namespace SingularFlagEnumeration {
             return new SingularFlag<T>(flag);
         }
 
-        /// <summary>Gets whether the provided flag is equal to the set flag.</summary>
-        /// <param name="flag">Flag to check.</param>
-        /// <returns></returns>
-        public bool HasFlag(T flag) =>
-            Enum.Equals(Flag, flag);
-
         /// <summary>Compares the current instance with another object of the same type and returns an integer that indicates whether the current instance precedes, follows, or occurs in the same position in the sort order as the other object.</summary>
         /// <param name="obj">Object to compare.</param>
         /// <returns> A value that indicates the relative order of the objects being compared. The return value has these meanings: Value Meaning Less than zero This instance precedes obj in the sort order. Zero This instance occurs in the same position in the sort order as obj. Greater than zero This instance follows obj in the sort order.</returns>
