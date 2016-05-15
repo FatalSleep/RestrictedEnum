@@ -1,23 +1,26 @@
-using NotSupportedException = System.NotSupportedException;
-using IComparable = System.IComparable;
-using Enum = System.Enum;
-using Type = System.Type;
+using System;
 
 namespace SingularFlagEnumeration {
     public class SingularFlag<T> where T : struct, IComparable {
         /// <summary>Gets the flag set for this object.</summary>
         private T Flag { get; set; }
 
-        /// <summary>Constructs a SingularFlag<T> with the default value of T.</summary>
+        /// <summary>Constructs a ImmutableSingularFlag<T> with the default value of T.</summary>
         public SingularFlag() {
             if(!typeof(T).IsEnum)
                 throw new NotSupportedException();
         }
 
-        /// <summary>Constructs a SingularFlag<T> with the provided flag of type T.</summary>
+        /// <summary>Constructs a ImmutableSingularFlag<T> with the provided flag of type T.</summary>
         /// <param name="flag">Flag to set.</param>
         public SingularFlag(T flag) : this() {
-            SetFlag(flag);
+            bool isDefinedFlagNotSet = !Enum.Equals(Flag, flag) && Enum.IsDefined(typeof(T), flag);
+
+            if(isDefinedFlagNotSet) {
+                Flag = flag;
+            } else {
+                throw new SingularFlagException("Cannot set non-existant or multiple flag(s) in ImmutableSingularFlag for enum: " + typeof(T).ToString());
+            }
         }
 
         /// <summary>Parses a member name into a member of type T if possible, otherwise null is returned.</summary>
@@ -27,22 +30,21 @@ namespace SingularFlagEnumeration {
             SingularFlag<T> result = null;
             T value;
 
-            if(Enum.TryParse<T>(name, out value)) {
-                result = new SingularFlag<T>();
-                result.SetFlag(value);
-            }
+            if(Enum.TryParse<T>(name, out value))
+                result = new SingularFlag<T>(value);
 
             return result;
         }
 
-        /// <summary>Attempts to set the defined flag if it exists in the Enum.</summary>
+        public static SingularFlag<T> Get(T flag) {
+            return new SingularFlag<T>(flag);
+        }
+
+        /// <summary>Creates a new ImmutableSingularFlag<T> with the specified flag.</summary>
         /// <param name="flag">Enum flag to set.</param>
-        /// <returns>True if the flag was set, false if the flag does not exist or the flag is already set.</returns>
-        public bool SetFlag(T flag) {
-            bool isDefinedFlagNotSet = !Enum.Equals(Flag, flag) && Enum.IsDefined(typeof(T), flag);
-            if(isDefinedFlagNotSet)
-                Flag = flag;
-            return isDefinedFlagNotSet;
+        /// <returns>New ImmutableSingularFlag<T>.</returns>
+        public SingularFlag<T> SetFlag(T flag) {
+            return new SingularFlag<T>(flag);
         }
 
         /// <summary>Gets whether the provided flag is equal to the set flag.</summary>
@@ -70,6 +72,16 @@ namespace SingularFlagEnumeration {
         /// <returns>True if the flag of each object is NOT the same, else false.</returns>
         public static bool operator !=(SingularFlag<T> obj1, SingularFlag<T> obj2) =>
             !obj1.Equals(obj2);
+        
+        /// <summary>Gets the underlying flag.</summary>
+        /// <param name="obj">SingularFlag to pull the flag from.</param>
+        public static implicit operator T(SingularFlag<T> obj) =>
+            obj.Flag;
+
+        /// <summary>Gets a SingularFlag from a flag.</summary>
+        /// <param name="obj">Flag to pull the SingularFlag from.</param>
+        public static implicit operator SingularFlag<T>(T obj) =>
+            new SingularFlag<T>(obj);
 
         /// <summary>Gets the type of T of this object.</summary>
         /// <returns>The underlying type of the enum of T of this generic object.</returns>
