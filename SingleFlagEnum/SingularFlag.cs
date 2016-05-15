@@ -36,14 +36,10 @@ namespace SingularFlagEnumeration {
             return result;
         }
 
-        public static SingularFlag<T> Get(T flag) {
-            return new SingularFlag<T>(flag);
-        }
-
         /// <summary>Creates a new ImmutableSingularFlag<T> with the specified flag.</summary>
         /// <param name="flag">Enum flag to set.</param>
         /// <returns>New ImmutableSingularFlag<T>.</returns>
-        public SingularFlag<T> SetFlag(T flag) {
+        public static SingularFlag<T> Get(T flag) {
             return new SingularFlag<T>(flag);
         }
 
