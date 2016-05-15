@@ -5,13 +5,13 @@ namespace SingularFlagEnumeration {
         /// <summary>Gets the flag set for this object.</summary>
         private T Flag { get; set; }
 
-        /// <summary>Constructs a ImmutableSingularFlag<T> with the default value of T.</summary>
+        /// <summary>Constructs a SingularFlag with the default value of T.</summary>
         public SingularFlag() {
             if(!typeof(T).IsEnum)
                 throw new NotSupportedException();
         }
 
-        /// <summary>Constructs a ImmutableSingularFlag<T> with the provided flag of type T.</summary>
+        /// <summary>Constructs a SingularFlag with the provided flag of type T.</summary>
         /// <param name="flag">Flag to set.</param>
         public SingularFlag(T flag) : this() {
             bool isDefinedFlagNotSet = !Enum.Equals(Flag, flag) && Enum.IsDefined(typeof(T), flag);
@@ -19,7 +19,7 @@ namespace SingularFlagEnumeration {
             if(isDefinedFlagNotSet) {
                 Flag = flag;
             } else {
-                throw new SingularFlagException("Cannot set non-existant or multiple flag(s) in ImmutableSingularFlag for enum: " + typeof(T).ToString());
+                throw new SingularFlagException("Cannot set non-existant or multiple flag(s) in SingularFlag for enum: " + typeof(T).ToString());
             }
         }
 
@@ -36,9 +36,9 @@ namespace SingularFlagEnumeration {
             return result;
         }
 
-        /// <summary>Creates a new ImmutableSingularFlag<T> with the specified flag.</summary>
+        /// <summary>Creates a new SingularFlag with the specified flag.</summary>
         /// <param name="flag">Enum flag to set.</param>
-        /// <returns>New ImmutableSingularFlag<T>.</returns>
+        /// <returns>New SingularFlag.</returns>
         public static SingularFlag<T> Get(T flag) {
             return new SingularFlag<T>(flag);
         }
