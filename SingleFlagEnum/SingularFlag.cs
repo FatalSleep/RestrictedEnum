@@ -75,7 +75,7 @@ namespace SingularFlagEnumeration {
 
         /// <summary>Gets the type of T of this object.</summary>
         /// <returns>The underlying type of the enum of T of this generic object.</returns>
-        public Type GetUnderlyingType() =>
+        public Type GetGenericType() =>
             typeof(T);
 
         /// <summary>Gets whether two objects equal (they share the same reference).</summary>
