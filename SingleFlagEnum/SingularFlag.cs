@@ -84,7 +84,7 @@ namespace SingularFlagEnumeration {
         public bool Equals(SingularFlag<T> obj) {
             if(obj.GetType() != GetType())
                 return false;
-            return this == obj;
+            return this.GetHashCode() == obj.GetHashCode();
         }
 
         /// <summary>Determines whether the specified object is equal to the current object.</summary>
