@@ -17,7 +17,7 @@ class Unsocial<T> {
    implicit operator Unsocial<T>(T);
   
    int CompareTo(Unsocial<T>);
-   Equals(Unsocial<T>);
+   bool Equals(Unsocial<T>);
    int GetHashCode();
 }
 ```
