@@ -4,19 +4,19 @@ Allows you to create an immutable instance that can only hold a single flag from
 ```C#
 // Implementation:
 class Unsocial<T> {
-  Unsocial();
-  Unsocial(T);
+   Unsocial();
+   Unsocial(T);
   
-  static Unsocial<T> Parse(string);
-  static Unsocial<T> Get(T);
-  Type GetGenericType();
+   static Unsocial<T> Parse(string);
+   static Unsocial<T> Get(T);
+   Type GetGenericType();
   
    bool operator ==(Unsocial<T>, Unsocial<T>);
    bool operator !=(Unsocial<T>, Unsocial<T>);
    implicit operator T(Unsocial<T>);
    implicit operator Unsocial<T>(T);
   
-  int CompareTo(Unsocial<T>);
+   int CompareTo(Unsocial<T>);
    Equals(Unsocial<T>);
    int GetHashCode();
 }
