@@ -9,13 +9,14 @@ class Unsocial<T> {
   
   static Unsocial<T> Parse(string);
   static Unsocial<T> Get(T);
+  Type GetGenericType();
   
-   int CompareTo(Unsocial<T>);
    bool operator ==(Unsocial<T>, Unsocial<T>);
    bool operator !=(Unsocial<T>, Unsocial<T>);
    implicit operator T(Unsocial<T>);
    implicit operator Unsocial<T>(T);
-   Type GetGenericType();
+  
+  int CompareTo(Unsocial<T>);
    Equals(Unsocial<T>);
    int GetHashCode();
 }
