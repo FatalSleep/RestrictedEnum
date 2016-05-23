@@ -3,15 +3,12 @@ namespace System {
         /// <summary>Gets the flag set for this object.</summary>
         private T Flag { get; set; }
 
-        /// <summary>Constructs an Unsocial with the default value of T.</summary>
-        public Unsocial() {
-            if(!typeof(T).IsEnum)
-                throw new NotSupportedException();
-        }
-
         /// <summary>Constructs an Unsocial with the provided flag of type T.</summary>
         /// <param name="flag">Flag to set.</param>
         public Unsocial(T flag) : this() {
+            if(!typeof(T).IsEnum)
+                throw new NotSupportedException();
+            
             bool isDefinedFlagNotSet = !Enum.Equals(Flag, flag) && Enum.IsDefined(typeof(T), flag);
 
             if(isDefinedFlagNotSet) {
