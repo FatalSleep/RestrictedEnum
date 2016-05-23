@@ -5,6 +5,8 @@ namespace System {
 
         /// <summary>Constructs an Unsocial with the provided flag of type T.</summary>
         /// <param name="flag">Flag to set.</param>
+        /// <exception cref="NotSupportedException"/>
+        /// <exception cref="ArgumentException"/>
         public Unsocial(T flag) : this() {
             if(!typeof(T).IsEnum)
                 throw new NotSupportedException();
